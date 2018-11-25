@@ -1,0 +1,260 @@
+!---------------
+!-----LÉVIS-----
+!---------------
+
+!Switch-Racine
+
+!VLAN locaux: AP-Employes, Tech, AP-Clients
+
+enable
+  configure terminal
+	vlan 110
+		name Directeurs
+	vlan 120
+		name Vendeurs
+	vlan 130
+		name Service
+	vlan 140
+		name Peinture
+	vlan 150
+		name Reception
+	vlan 160
+		name AP-Employes
+	vlan 170
+		name AP-Clients
+    vlan 180
+		name Tech
+    exit
+	interface f0/1
+		no shut
+		switchport mode access
+		switchport access vlan 180
+	interface f0/2
+		no shut
+		switchport mode access
+		switchport access vlan 170
+	interface f0/3
+		no shut
+		switchport mode access
+		switchport access vlan 160
+	interface range f0/4-17
+		shut
+	interface f0/18
+		no shut
+        no switchport trunk allowed vlan
+        switchport mode trunk
+        switchport trunk allowed vlan 110,130,140
+	interface f0/19
+		no shut
+		switchport mode trunk
+        switchport trunk allowed vlan 110
+	interface f0/20
+		no shut
+		switchport mode trunk
+		switchport access vlan 110
+	interface f0/21
+		no shut
+		!ip address 192.168.10.10
+	interface f0/22
+		no shut
+		!ip address 192.168.20.10
+	interface f0/23
+		no shut	
+		!ip address 192.168.30.10
+    interface f0/24
+		no shut
+		no switchport trunk allowed vlan
+		switchport mode trunk
+		switchport trunk allowed vlan 110,120,150,160
+    exit
+  exit
+  copy running-config startup-config
+
+exit
+
+
+!Switch-Service
+
+enable
+  configure terminal
+	vlan 110
+		name Directeurs
+	vlan 130
+		name Service
+	vlan 140
+		name Peinture
+    exit
+	interface f0/1
+		no shut
+		switchport mode access
+		switchport access vlan 130
+    interface f0/23
+      no switchport trunk allowed vlan
+      switchport mode trunk
+      switchport trunk allowed vlan 110,140
+    interface f0/24
+      no switchport trunk allowed vlan
+      switchport mode trunk
+      switchport trunk allowed vlan 110,130,140
+    exit
+  exit
+  copy running-config startup-config
+
+exit
+
+
+!Switch-Peinture
+
+enable
+  configure terminal
+	vlan 110
+		name Directeurs
+	vlan 140
+		name Peinture
+    exit
+	interface f0/1
+		no shut
+		switchport mode access
+		switchport access vlan 110
+	interface f0/2
+		no shut
+		switchport mode access
+		switchport access vlan 140
+    interface f0/24
+      no switchport trunk allowed vlan
+      switchport mode trunk
+      switchport trunk allowed vlan 110,140
+    exit
+  exit
+  copy running-config startup-config
+
+exit
+
+
+!Switch-Vendeurs
+
+enable
+  configure terminal
+	vlan 120
+		name Vendeurs
+	vlan 150
+		name Reception
+    exit
+	interface f0/1
+		no shut
+		switchport mode access
+		switchport access vlan 150
+	interface f0/2
+		no shut
+		switchport mode access
+		switchport access vlan 120
+    interface f0/24
+      no switchport trunk allowed vlan
+      switchport mode trunk
+      switchport trunk allowed vlan 120,150
+    exit
+  exit
+  copy running-config startup-config
+
+exit
+
+
+!Switch-Direction
+
+enable
+  configure terminal
+	vlan 110
+		name Directeurs
+    exit
+	interface f0/1
+		no shut
+		switchport mode access
+		switchport access vlan 110
+    interface f0/24
+      no switchport trunk allowed vlan
+      switchport mode trunk
+      switchport trunk allowed vlan 110
+    exit
+  exit
+  copy running-config startup-config
+
+exit
+
+
+
+!---------------
+!--BEAUCEVILLE--
+!---------------
+!Switch-Neuf
+
+enable
+  configure terminal
+	vlan 115
+		name Directeurs-B
+	vlan 125
+		name Vendeurs-B
+	vlan 155
+		name Reception-B
+	vlan 165
+		name AP-Employes-B
+    exit
+	interface f0/1
+		no shut
+		switchport mode access
+		switchport access vlan 155
+	interface f0/2
+		no shut
+		switchport mode access
+		!À REVÉRIFIER
+		switchport access vlan 125
+	interface f0/3
+		no shut
+		switchport mode access
+		!À REVÉRIFIER
+		switchport access vlan 125
+	interface f0/4
+		no shut
+		switchport mode access
+		switchport access vlan 165
+    interface f0/23
+      no switchport trunk allowed vlan
+      switchport mode trunk
+      switchport trunk allowed vlan 110,120
+    interface f0/24
+      no switchport trunk allowed vlan
+      switchport mode trunk
+      switchport trunk allowed vlan 115,125,155,165
+    exit
+  exit
+  copy running-config startup-config
+
+exit
+
+!---------------------
+!Switch-Usagers
+
+enable
+  configure terminal
+	vlan 115
+		name Directeurs-B
+	vlan 125
+		name Vendeurs-B
+    exit
+	interface f0/1
+		no shut
+		switchport mode access
+		switchport access vlan 115
+	interface f0/2
+		no shut
+		switchport mode access
+		switchport access vlan 125
+    interface f0/24
+      no switchport trunk allowed vlan
+      switchport mode trunk
+      switchport trunk allowed vlan 115,125
+    exit
+  exit
+  copy running-config startup-config
+
+exit
+
