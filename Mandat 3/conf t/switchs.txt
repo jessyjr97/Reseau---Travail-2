@@ -197,8 +197,6 @@ enable
 		name Reception-B
 	vlan 165
 		name AP-Employes-B
-	vlan 190
-		name Inventaire-B
     exit
 	interface f0/1
 		no shut
@@ -218,10 +216,6 @@ enable
 		no shut
 		switchport mode access
 		switchport access vlan 165
-	interface f0/22
-      no switchport trunk allowed vlan
-      switchport mode trunk
-      switchport trunk allowed vlan 190
     interface f0/23
       no switchport trunk allowed vlan
       switchport mode trunk
