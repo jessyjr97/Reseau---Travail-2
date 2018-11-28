@@ -264,20 +264,23 @@ exit
 
 enable
   configure terminal
-	vlan 190
-		name Inventaire-B
+	vlan 195
+		name Pieces
     exit
 	interface f0/1
 		no shut
+		switchport mode access
+		switchport access vlan 195
 	interface f0/2
 		no shut
 		switchport mode access
-		switchport access vlan 190
-	interface f0/3
-	no switchport trunk allowed vlan
+		switchport access vlan 195
+	interface f0/24
+	  no shut
+	  no switchport trunk allowed vlan
       switchport mode trunk
-      switchport trunk allowed vlan 190
-    interface range f0/4-24
+      switchport trunk allowed vlan 195
+    interface range f0/3-23
 		shut
     exit
   exit
