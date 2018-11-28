@@ -4,8 +4,15 @@
 enable
 	conf t
 		!---- Access Lists ----
+		no access-list 1
+		access-list 1
+			permit 192.168.110.0 0.0.0.255
+			permit 192.168.120.0 0.0.0.255
+			permit 192.168.150.0 0.0.0.255
+			permit 192.168.160.0 0.0.0.255
+			permit 192.168.170.0 0.0.0.255
+			permit 192.168.180.0 0.0.0.255
 		ip access-list extended Directeurs
-			permit ip any 172.24.2.0 0.255.255.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit tcp any host 192.168.10.20 eq 2840
@@ -13,7 +20,6 @@ enable
 			permit ip any 192.168.110.0 0.0.0.255
 			permit ip any 192.168.115.0 0.0.0.255
 		ip access-list extended Vendeurs
-			permit ip any 172.24.2.0 0.255.255.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit tcp any host 192.168.10.30 eq 80
@@ -28,29 +34,27 @@ enable
 			permit ip any 192.168.140.0 0.0.0.255
 			permit ip any 192.168.145.0 0.0.0.255
 		ip access-list extended Reception
-			permit ip any 172.24.2.0 0.255.255.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit ip any 192.168.150.0 0.0.0.255
 			permit ip any 192.168.155.0 0.0.0.255
 		ip access-list extended AP-Employes
-			permit ip any 172.24.2.0 0.255.255.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit tcp any host 192.168.10.30 eq 80
 		ip access-list extended AP-Clients
-			permit ip any 172.24.2.0 0.0.0.255
+			deny any any
 		ip access-list extended Tech
 			permit ip any host 192.168.180.1
 		!---- Interfaces ----
 		int f0/0
 			no shut
-			ip address 172.24.2.2 255.0.0.0
+			ip address 172.24.2.1 255.0.0.0
+			ip nat outside
 		int f0/1
 			no shut
 			ip access-group Serveurs out
 			ip access 192.168.10.1 255.255.255.0
-			ip nat inside
 		int f0/1.1
 			no shutdown
 			encapsulation dot1q 110
@@ -68,13 +72,11 @@ enable
 			encapsulation dot1q 130
 			ip access-group Service in
 			ip address 192.168.130.1 255.255.255.0
-			ip nat inside
 		int f0/1.4
 			no shutdown
 			encapsulation dot1q 140
 			ip access-group Peinture in
 			ip address 192.168.140.1 255.255.255.0
-			ip nat inside
 		int f0/1.5
 			no shutdown
 			encapsulation dot1q 150
@@ -102,7 +104,7 @@ enable
 		int tunnel 1
 			no shut
 			ip address 192.168.255.2 255.255.255.0
-			tunnel destination 172.24.2.1
+			tunnel destination 172.24.2.2
 			tunnel source f0/0
 			tunnel mode gre ip
 		exit
@@ -156,6 +158,9 @@ enable
 			default-router 192.168.180.1
 			dns-server 8.8.8.8
 		exit
+		!---- NAT Pools ----
+		ip nat pool internet 172.24.2.1 172.24.2.1 netmask 255.0.0.0
+		ip nat inside source list 1 pool internet overload
 		!---- Routing ----
 		ip route 192.168.20.0 255.255.255.0 192.168.255.1
 		ip routing
@@ -171,8 +176,14 @@ exit
 enable
 	conf t
 		!---- Access Lists ----
+		no access-list 2
+		access-list 2
+			permit 192.168.115.0 0.0.0.255
+			permit 192.168.125.0 0.0.0.255
+			permit 192.168.155.0 0.0.0.255
+			permit 192.168.165.0 0.0.0.255
+			permit 192.168.195.0 0.0.0.255
 		ip access-list extended Directeurs
-			permit ip any 172.24.2.0 0.255.255.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit tcp any host 192.168.10.20 eq 2840
@@ -180,28 +191,25 @@ enable
 			permit ip any 192.168.110.0 0.0.0.255
 			permit ip any 192.168.115.0 0.0.0.255
 		ip access-list extended Vendeurs
-			permit ip any 172.24.2.0 0.255.255.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit tcp any host 192.168.10.30 eq 80
 			permit ip any 192.168.120.0 0.0.0.255
 			permit ip any 192.168.125.0 0.0.0.255
 		ip access-list extended Reception
-			permit ip any 172.24.2.0 0.255.255.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit ip any 192.168.150.0 0.0.0.255
 			permit ip any 192.168.155.0 0.0.0.255
 		ip access-list extended AP-Employes
-			permit ip any 172.24.2.0 0.255.255.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit tcp any host 192.168.10.30 eq 80
-			deny ip any any
 		!---- Interfaces ----
 		int f0/0
 			no shut
-			ip address 172.24.2.1 255.0.0.0
+			ip address 172.24.2.2 255.0.0.0
+			ip nat outside
 		int f0/1
 			no shut
 			ip address 192.168.10.1 255.255.255.0
@@ -232,7 +240,7 @@ enable
 		int tunnel 1
 			no shut
 			ip address 192.168.255.1 255.255.255.0
-			tunnel destination 172.24.2.2
+			tunnel destination 172.24.2.1
 			tunnel source f0/0
 			tunnel mode gre ip
 		exit
@@ -261,8 +269,13 @@ enable
 			network 192.168.165.0 255.255.255.0
 			default-router 192.168.165.1
 			dns-server 8.8.8.8
+		!---- NAT Pools ----
+		ip nat pool internet 172.24.2.2 172.24.2.2 netmask 255.0.0.0
+		ip nat inside source list 2 pool internet overload
 		exit
-		ip route 192.168.10.0 255.255.255.0 192.168.255.2
+		!---- Routing ----
+		ip route 192.168.20.0 255.255.255.0 192.168.255.2
+		ip routing
 	ip routing
 	exit
 	copy running startup
