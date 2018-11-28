@@ -11,7 +11,7 @@ enable
 			ip address 192.168.20.1 255.255.255.0
 		int tunnel 0
 			no shut
-			ip address 192.168.30.2 255.255.255.0
+			ip address 192.168.255.2 255.255.255.0
 			tunnel destination 172.24.2.1
 			tunnel source f0/0
 			tunnel mode gre ip
@@ -23,7 +23,7 @@ enable
 			default-router 192.168.20.1
 			dns-server 8.8.8.8
 		exit
-		ip route 192.168.10.0 255.255.255.0 192.168.30.2
+		ip route 192.168.10.0 255.255.255.0 192.168.255.2
 		ip routing
 	exit
 	copy running startup
@@ -44,7 +44,7 @@ enable
 			ip address 192.168.10.1 255.255.255.0
 		int tunnel 0
 			no shut
-			ip address 192.168.30.1 255.255.255.0
+			ip address 192.168.255.1 255.255.255.0
 			tunnel destination 172.24.2.2
 			tunnel source f0/0
 			tunnel mode gre ip
@@ -56,7 +56,7 @@ enable
 			default-router 192.168.10.1
 			dns-server 8.8.8.8
 		exit
-		ip route 192.168.20.0 255.255.255.0 192.168.30.1
+		ip route 192.168.20.0 255.255.255.0 192.168.255.1
 	ip routing
 	exit
 	copy running startup

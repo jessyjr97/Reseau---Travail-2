@@ -65,7 +65,7 @@ enable
 		no shut
 		no switchport trunk allowed vlan
 		switchport mode trunk
-		switchport trunk allowed vlan 110,120,150,160
+		switchport trunk allowed vlan 110,120,130,140,150,160,170,180
     exit
   exit
   copy running-config startup-config
@@ -193,6 +193,8 @@ enable
 		name Directeurs-B
 	vlan 125
 		name Vendeurs-B
+	vlan 135
+		name Service-B
 	vlan 155
 		name Reception-B
 	vlan 165
@@ -205,13 +207,11 @@ enable
 	interface f0/2
 		no shut
 		switchport mode access
-		!À REVÉRIFIER
 		switchport access vlan 125
 	interface f0/3
 		no shut
 		switchport mode access
-		!À REVÉRIFIER
-		switchport access vlan 125
+		switchport access vlan 135
 	interface f0/4
 		no shut
 		switchport mode access
@@ -223,7 +223,7 @@ enable
     interface f0/24
       no switchport trunk allowed vlan
       switchport mode trunk
-      switchport trunk allowed vlan 115,125,155,165
+      switchport trunk allowed vlan 115,125,135,155,165
     exit
   exit
   copy running-config startup-config
