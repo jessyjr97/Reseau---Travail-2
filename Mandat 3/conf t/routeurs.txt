@@ -6,6 +6,14 @@ enable
 	conf t
 		!---- Access Lists ----
 		no access-list 1
+		no ip access-list extended Directeurs
+		no ip access-list extended Vendeurs
+		no ip access-list extended Service
+		no ip access-list extended Peinture
+		no ip access-list extended Reception
+		no ip access-list extended AP-Employes
+		no ip access-list extended AP-Clients
+		no ip access-list extended Tech
 		access-list 1
 			permit 192.168.110.0 0.0.0.255
 			permit 192.168.120.0 0.0.0.255
@@ -75,52 +83,52 @@ enable
 		int f0/1
 			no shut
 		int f0/1.1
-			no shutdown
+			no shut
 			encapsulation dot1q 110
 			ip access-group Directeurs in
 			ip address 192.168.110.1 255.255.255.0
 			ip nat inside
 		int f0/1.2
-			no shutdown
+			no shut
 			encapsulation dot1q 120
 			ip access-group Vendeurs in
 			ip address 192.168.120.1 255.255.255.0
 			ip nat inside
 		int f0/1.3
-			no shutdown
+			no shut
 			encapsulation dot1q 130
 			ip access-group Service in
 			ip address 192.168.130.1 255.255.255.0
 		int f0/1.4
-			no shutdown
+			no shut
 			encapsulation dot1q 140
 			ip access-group Peinture in
 			ip address 192.168.140.1 255.255.255.0
 		int f0/1.5
-			no shutdown
+			no shut
 			encapsulation dot1q 150
 			ip access-group Reception in
 			ip address 192.168.150.1 255.255.255.0
 			ip nat inside
 		int f0/1.6
-			no shutdown
+			no shut
 			encapsulation dot1q 160
 			ip access-group AP-Employes in
 			ip address 192.168.160.1 255.255.255.0
 			ip nat inside
 		int f0/1.7
-			no shutdown
+			no shut
 			encapsulation dot1q 170
 			ip address 192.168.170.1 255.255.255.0
 			ip nat inside
 		int f0/1.8
-			no shutdown
+			no shut
 			encapsulation dot1q 180
 			ip access-group Tech in
 			ip address 192.168.180.1 255.255.255.0
 			ip nat inside
 		int f0/1.9
-			no shutdown
+			no shut
 			encapsulation dot1q 1
 			ip address 192.168.10.1 255.255.255.0
 		int tunnel 1
@@ -205,6 +213,11 @@ enable
 	conf t
 		!---- Access Lists ----
 		no access-list 2
+		no ip access-list extended Directeurs
+		no ip access-list extended Vendeurs
+		no ip access-list extended Service
+		no ip access-list extended Reception
+		no ip access-list extended AP-Employes
 		access-list 2
 			permit 192.168.115.0 0.0.0.255
 			permit 192.168.125.0 0.0.0.255
@@ -262,30 +275,30 @@ enable
 			no shut
 			ip address 192.168.20.1 255.255.255.0
 		int f0/1.1
-			no shutdown
+			no shut
 			encapsulation dot1q 115
 			ip access-group Directeurs in
 			ip address 192.168.115.1 255.255.255.0
 			ip nat inside
 		int f0/1.2
-			no shutdown
+			no shut
 			encapsulation dot1q 125
 			ip access-group Vendeurs in
 			ip address 192.168.125.1 255.255.255.0
 			ip nat inside
 		int f0/1.3
-			no shutdown
+			no shut
 			encapsulation dot1q 135
 			ip access-group Service in
 			ip address 192.168.135.1 255.255.255.0
 		int f0/1.5
-			no shutdown
+			no shut
 			encapsulation dot1q 155
 			ip access-group Reception in
 			ip address 192.168.155.1 255.255.255.0
 			ip nat inside
 		int f0/1.6
-			no shutdown
+			no shut
 			encapsulation dot1q 165
 			ip access-group AP-Employes in
 			ip address 192.168.165.1 255.255.255.0
@@ -353,6 +366,7 @@ exit
 
 enable
 	conf t
+		no ip access-list extended Pieces
 		ip access-list extended Pieces
 			permit udp any any eq 67
 			permit ip 192.168.180.0 0.0.0.255 any
@@ -362,10 +376,10 @@ enable
 			no shut
 			ip address 192.168.20.2 255.255.255.0 	
 		int f0/1
-			no shutdown
+			no shut
 			ip address 192.168.30.1 255.255.255.0
 		int f0/1.1
-			no shutdown
+			no shut
 			encapsulation dot1q 195
 			ip access-group Pieces in
 			ip address 192.168.195.1 255.255.255.0
