@@ -342,8 +342,8 @@ enable
 	conf t
 		ip access-list extended Pieces
 			permit udp any any eq 67
-			permit ip host 192.168.180.0 any
-			permit ip any host 192.168.180.0
+			permit ip 192.168.180.0 0.0.0.255 any
+			permit ip any 192.168.180.0 0.0.0.255
 			permit tcp any host 192.168.30.40 eq 80
 		int f0/0
 			no shut
