@@ -50,15 +50,8 @@ enable
 		no shut
 		switchport mode trunk
 		switchport access vlan 110
-	interface f0/21
+	interface range f0/21 - 23
 		no shut
-		!ip address 192.168.10.10
-	interface f0/22
-		no shut
-		!ip address 192.168.10.20
-	interface f0/23
-		no shut	
-		!ip address 192.168.10.30
     interface f0/24
 		no shut
 		no switchport trunk allowed vlan
@@ -69,7 +62,6 @@ enable
   copy running-config startup-config
 
 exit
-
 
 !Switch-Service
 
@@ -86,6 +78,8 @@ enable
 		no shut
 		switchport mode access
 		switchport access vlan 130
+	int f0/2 - 23
+		shut
     interface f0/23
       no switchport trunk allowed vlan
       switchport mode trunk
@@ -99,7 +93,6 @@ enable
   copy running-config startup-config
 
 exit
-
 
 !Switch-Peinture
 
@@ -118,6 +111,8 @@ enable
 		no shut
 		switchport mode access
 		switchport access vlan 140
+	int f0/3 - 23
+		shut
     interface f0/24
       no switchport trunk allowed vlan
       switchport mode trunk
@@ -127,7 +122,6 @@ enable
   copy running-config startup-config
 
 exit
-
 
 !Switch-Vendeurs
 
@@ -146,6 +140,8 @@ enable
 		no shut
 		switchport mode access
 		switchport access vlan 120
+	int f0/3 - 23
+		shut
     interface f0/24
       no switchport trunk allowed vlan
       switchport mode trunk
@@ -155,7 +151,6 @@ enable
   copy running-config startup-config
 
 exit
-
 
 !Switch-Direction
 
@@ -168,6 +163,8 @@ enable
 		no shut
 		switchport mode access
 		switchport access vlan 110
+	int f0/2 - 23
+		shut
     interface f0/24
       no switchport trunk allowed vlan
       switchport mode trunk
@@ -178,11 +175,10 @@ enable
 
 exit
 
-
-
 !---------------
 !--BEAUCEVILLE--
 !---------------
+
 !Switch-Neuf
 
 enable
@@ -214,6 +210,8 @@ enable
 		no shut
 		switchport mode access
 		switchport access vlan 165
+	interface range f0/5 - 21
+		shut
 	interface f0/22
 		no shut
 		switchport mode access
@@ -232,7 +230,6 @@ enable
 
 exit
 
-!---------------------
 !Switch-Usagers
 
 enable
@@ -250,6 +247,8 @@ enable
 		no shut
 		switchport mode access
 		switchport access vlan 125
+	interface range f0/3 - 23
+		shut
     interface f0/24
       no switchport trunk allowed vlan
       switchport mode trunk
@@ -260,8 +259,10 @@ enable
 
 exit
 
+!---------------
+!--BEAUCEVILLE--
+!------DEF------
 
-!---------------------
 !Switch-C-Beauceville-DEF
 
 enable
@@ -277,6 +278,8 @@ enable
 		no shut
 		switchport mode access
 		switchport access vlan 195
+	int range f0/3 - 23
+		shut
 	interface f0/24
 	  no shut
 	  no switchport trunk allowed vlan

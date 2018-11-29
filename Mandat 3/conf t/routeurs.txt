@@ -1,5 +1,6 @@
--- Routeur Lévis --
-
+!---------------
+!-----LÉVIS-----
+!---------------
 
 enable
 	conf t
@@ -14,8 +15,8 @@ enable
 			permit 192.168.180.0 0.0.0.255
 		ip access-list extended Directeurs
 			permit udp any any eq 67
-			permit ip host 192.168.180.0 any
-			permit ip any host 192.168.180.0
+			permit ip 192.168.180.0 0.0.0.255 any
+			permit ip any 192.168.180.0 0.0.0.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit tcp any host 192.168.10.20 eq 2840
@@ -24,7 +25,8 @@ enable
 			permit ip any 192.168.115.0 0.0.0.255
 		ip access-list extended Vendeurs
 			permit udp any any eq 67
-			permit ip host 192.168.180.0 any
+			permit ip 192.168.180.0 0.0.0.255 any
+			permit ip any 192.168.180.0 0.0.0.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit tcp any host 192.168.10.30 eq 80
@@ -32,32 +34,37 @@ enable
 			permit ip any 192.168.125.0 0.0.0.255
 		ip access-list extended Service
 			permit udp any any eq 67
-			permit ip host 192.168.180.0 any
+			permit ip 192.168.180.0 0.0.0.255 any
+			permit ip any 192.168.180.0 0.0.0.255
 			permit tcp any host 192.168.10.20 eq 2840
 			permit ip any 192.168.130.0 0.0.0.255
 			permit ip any 192.168.135.0 0.0.0.255
 		ip access-list extended Peinture
 			permit udp any any eq 67
-			permit ip host 192.168.180.0 any
+			permit ip 192.168.180.0 0.0.0.255 any
+			permit ip any 192.168.180.0 0.0.0.255
 			permit tcp any host 192.168.10.20 eq 2840
 			permit ip any 192.168.140.0 0.0.0.255
 			permit ip any 192.168.145.0 0.0.0.255
 		ip access-list extended Reception
 			permit udp any any eq 67
-			permit ip host 192.168.180.0 any
+			permit ip 192.168.180.0 0.0.0.255 any
+			permit ip any 192.168.180.0 0.0.0.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit ip any 192.168.150.0 0.0.0.255
 			permit ip any 192.168.155.0 0.0.0.255
 		ip access-list extended AP-Employes
 			permit udp any any eq 67
-			permit ip host 192.168.180.0 any
+			permit ip 192.168.180.0 0.0.0.255 any
+			permit ip any 192.168.180.0 0.0.0.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit tcp any host 192.168.10.30 eq 80
 		ip access-list extended AP-Clients
 			permit udp any any eq 67
-			permit ip host 192.168.180.0 any
+			permit ip 192.168.180.0 0.0.0.255 any
+			permit ip any 192.168.180.0 0.0.0.255
 		ip access-list extended Tech
 			permit ip any any
 		!---- Interfaces ----
@@ -190,9 +197,9 @@ enable
 	
 exit
 
-
--- Routeur Beauceville --
-
+!---------------
+!--BEAUCEVILLE--
+!---------------
 
 enable
 	conf t
@@ -206,7 +213,8 @@ enable
 			permit 192.168.195.0 0.0.0.255
 		ip access-list extended Directeurs
 			permit udp any any eq 67
-			permit ip host 192.168.180.0 any
+			permit ip 192.168.180.0 0.0.0.255 any
+			permit ip any 192.168.180.0 0.0.0.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit tcp any host 192.168.10.20 eq 2840
@@ -215,7 +223,8 @@ enable
 			permit ip any 192.168.115.0 0.0.0.255
 		ip access-list extended Vendeurs
 			permit udp any any eq 67
-			permit ip host 192.168.180.0 any
+			permit ip 192.168.180.0 0.0.0.255 any
+			permit ip any 192.168.180.0 0.0.0.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit tcp any host 192.168.10.30 eq 80
@@ -223,20 +232,23 @@ enable
 			permit ip any 192.168.125.0 0.0.0.255
 		ip access-list extended Service
 			permit udp any any eq 67
-			permit ip host 192.168.180.0 any
+			permit ip 192.168.180.0 0.0.0.255 any
+			permit ip any 192.168.180.0 0.0.0.255
 			permit tcp any host 192.168.10.20 eq 2840
 			permit ip any 192.168.130.0 0.0.0.255
 			permit ip any 192.168.135.0 0.0.0.255
 		ip access-list extended Reception
 			permit udp any any eq 67
-			permit ip host 192.168.180.0 any
+			permit ip 192.168.180.0 0.0.0.255 any
+			permit ip any 192.168.180.0 0.0.0.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit ip any 192.168.150.0 0.0.0.255
 			permit ip any 192.168.155.0 0.0.0.255
 		ip access-list extended AP-Employes
 			permit udp any any eq 67
-			permit ip host 192.168.180.0 any
+			permit ip 192.168.180.0 0.0.0.255 any
+			permit ip any 192.168.180.0 0.0.0.255
 			permit tcp any host 192.168.10.10 eq 110
 			permit tcp any host 192.168.10.10 eq 25
 			permit tcp any host 192.168.10.30 eq 80
@@ -335,8 +347,9 @@ enable
 	
 exit
 
-
--- Routeur Beauceville-DEF --
+!---------------
+!--BEAUCEVILLE--
+!------DEF------
 
 enable
 	conf t
